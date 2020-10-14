@@ -18,7 +18,7 @@ def trainer(request):
         form = trainerForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/home/?submitted=True')
+            return HttpResponseRedirect('/?submitted=True')
     else:
         form = trainerForm()
         if 'submitted' in request.GET:
@@ -31,7 +31,7 @@ def member(request):
         form = memberForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/home/?submitted=True')
+            return HttpResponseRedirect('/?submitted=True')
     else:
         form = memberForm()
         if 'submitted' in request.GET:
