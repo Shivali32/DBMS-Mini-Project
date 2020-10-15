@@ -7,7 +7,7 @@ from django.db import models
   
 
 class trainer(models.Model):  
-    t_id = models.CharField(unique = True, db_index = True, max_length = 10)
+    #t_id = models.CharField(unique = True, db_index = True, max_length = 10)
     t_name  = models.CharField(max_length = 100, null = False)
     t_age  = models.CharField(max_length = 20)
     t_phno = models.CharField(max_length = 20)
@@ -20,7 +20,7 @@ class trainer(models.Model):
         return self.t_name
 
 class member(models.Model):  
-    m_id = models.CharField(unique = True, db_index = True, max_length = 10)
+    #m_id = models.CharField(unique = True, db_index = True, max_length = 10)
     m_name  = models.CharField(max_length = 100, null = False)
     m_age  = models.CharField(max_length = 20)
     m_phno = models.CharField(max_length = 20)
@@ -35,7 +35,7 @@ class member(models.Model):
         return self.m_name
 
 class facility(models.Model):  
-    f_id = models.CharField(unique = True, db_index = True, max_length = 10)
+    #f_id = models.CharField(unique = True, db_index = True, max_length = 10)
     f_name  = models.CharField(max_length = 100, null = False)
     f_cost  = models.CharField(max_length = 20)
     f_timing = models.CharField(max_length = 20)

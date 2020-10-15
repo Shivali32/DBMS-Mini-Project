@@ -3,6 +3,8 @@ from gym import views
 
 urlpatterns = [ 
     path("", views.home, name="home"),
-    path('member/', views.member),
-    path('trainer/', views.trainer),
+    path('EnterMember/', views.EnterMember),
+    path('EnterTrainer/', views.EnterTrainer),
+    path('showTrainer/', views.showTrainer),
+    path('showMember/', views.showMember),
 ]
