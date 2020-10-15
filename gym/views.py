@@ -2,6 +2,7 @@ from django.shortcuts import render
 from gym.models import member,trainer
 # Create your views here.
 from gym.form import trainerForm, memberForm
+from django.db import connection
 
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -58,3 +59,46 @@ def showMember(request):
        
 
     return render(request,"showMember.html",{'members':members})
+
+
+
+def deleteMember(request):
+
+    members=[]
+    if request.method == 'GET':
+        #do_something()
+        for m in member.objects.raw('SELECT * FROM member'):
+            
+             members.append(m.m_name)
+        return render(request,"deleteMember.html",{'members':members})
+    elif request.method == 'POST':
+        name=request.POST['name']
+        print(name)
+        with connection.cursor() as c:
+            c.execute("DELETE FROM member WHERE m_name = '%s' " ,
+        name)
+        for m in member.objects.raw('SELECT * FROM member'):
+            
+            members.append(m.m_name)
+        #do_something_else()
+        return render(request,"deleteMember.html",{'members':members})
+
+
+
+def deleteTrainer(request):
+    trainers=[]
+    if request.method == 'GET':
+        for t in trainer.objects.raw('SELECT * FROM trainer'):
+            trainers.append(t.t_name)
+        #do_something()
+        return render(request,"deleteTrainer.html",{"trainers":trainers})
+    elif request.method == 'POST':
+        name=request.POST['name']
+        print(name)
+        with connection.cursor() as c:
+            c.execute("DELETE FROM trainer WHERE m_name = '%s' " ,
+        name)
+        for t in trainer.objects.raw('SELECT * FROM trainer'):
+            trainers.append(t.t_name)
+        #do_something_else()
+        return render(request,"deleteTrainer.html",{"trainers":trainers})

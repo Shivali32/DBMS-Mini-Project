@@ -1,0 +1,20 @@
+<!DOCTYPE html>  
+<html lang="en">  
+    <head>  
+        <meta charset="UTF-8">  
+        <title>delete Trainer</title>  
+    </head>  
+    <body>
+      Name of trainer you want to delete
+      <form method="POST" class="post-form">  
+        {% csrf_token %}  
+        <label for="name">Your name: </label>
+        <input id="name" type="text" name="name" value="name">
+        <button type="submit" class="save btn btn-default">Submit</button>  
+    </form>  
+      new Trainer list.
+       {%for trainer in trainers%}
+       {{ trainer|safe }} 
+         {% endfor %}
+    </body>  
+</html> 
