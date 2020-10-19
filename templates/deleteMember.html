@@ -13,9 +13,6 @@
         <input id="name" type="text" name="name" value="name">
           <button type="submit" class="save btn btn-default">Submit</button>  
       </form>  
-       new Members list.
-        {%for member in members%}
-        {{ member|safe }} 
-          {% endfor %}
+       {{plot_div|safe}}
     </body>  
 </html> 
