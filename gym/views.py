@@ -46,31 +46,25 @@ def EnterMember(request):
 
 
 def showTrainer(request):
-    trainersName=[]
-    trainersAge=[]
-    trainersNumber=[]
-    trainersSalary=[]
+    df = pd.DataFrame(columns = ['Name', 'Age','Number','Salary']) 
+    
     for t in trainer.objects.raw('SELECT * FROM trainer;'):
-        trainersName.append(t.t_name)
-        trainersAge.append(t.t_age)
-        trainersNumber.append(t.t_phno)
-        trainersSalary.append(t.t_salary)
-    df=getDataframeTrainer(trainersAge,trainersName,trainersNumber,trainersSalary)
+        df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Salary': t.t_salary}, ignore_index=True)
+        
+    
+    print(df)
     plotlyDict=showtableTrainer(df)
     return render(request,"showTrainer.html",plotlyDict)
 
 
 
 def showMember(request):
-    membersName=[]
-    membersAge=[]
-    membersNumber=[]
+    df = pd.DataFrame(columns = ['Name', 'Age','Number']) 
     for m in member.objects.raw('SELECT * FROM member;'):
-        
-        membersAge.append(m.m_age)
-        membersNumber.append(m.m_phno)
-        membersName.append(m.m_name)
-    df=getDataframeMember(membersAge,membersName,membersNumber)
+        df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+       
+    #df=getDataframeMember(membersAge,membersName,membersNumber)
+    print (df)
     plotlyDict=showtableMember(df)
     return render(request,"showMember.html",plotlyDict)
 
@@ -78,16 +72,14 @@ def showMember(request):
 
 def deleteMember(request):
 
-    membersName=[]
-    membersAge=[]
-    membersNumber=[]
+    df = pd.DataFrame(columns = ['Name', 'Age','Number']) 
+   
     if request.method == 'GET':
         #do_something()
         for m in member.objects.raw('SELECT * FROM member'):
-             membersAge.append(m.m_age)
-             membersNumber.append(m.m_phno)
-             membersName.append(m.m_name)
-        df=getDataframeMember(membersAge,membersName,membersNumber)
+              df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+       
+        #df=getDataframeMember(membersAge,membersName,membersNumber)
         plotlyDict=showtableMember(df)
         return render(request,"deleteMember.html",plotlyDict)
     elif request.method == 'POST':
@@ -97,30 +89,24 @@ def deleteMember(request):
             c.execute("DELETE FROM member WHERE m_name = %s; " ,
         [name])
         for m in member.objects.raw('SELECT * FROM member;'):
-            membersAge.append(m.m_age)
-            membersNumber.append(m.m_phno)
-            membersName.append(m.m_name)
+            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+       
         #do_something_else()
-        df=getDataframeMember(membersAge,membersName,membersNumber)
+        
         plotlyDict=showtableMember(df)
         return render(request,"deleteMember.html",plotlyDict)
 
 
 
 def deleteTrainer(request):
-    trainersName=[]
-    trainersAge=[]
-    trainersNumber=[]
-    trainersSalary=[]
+    
+    df = pd.DataFrame(columns = ['Name', 'Age','Number','Salary']) 
     
     if request.method == 'GET':
         for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            trainersName.append(t.t_name)
-            trainersAge.append(t.t_age)
-            trainersNumber.append(t.t_phno)
-            trainersSalary.append(t.t_salary)
+            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+       
             #do_something()
-        df=getDataframeTrainer(trainersAge,trainersName,trainersNumber,trainersSalary)
         plotlyDict=showtableTrainer(df)
         return render(request,"deleteTrainer.html",plotlyDict)
     elif request.method == 'POST':
@@ -130,12 +116,9 @@ def deleteTrainer(request):
             c.execute("DELETE FROM trainer WHERE t_name = %s " ,
         [name])
         for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            trainersName.append(t.t_name)
-            trainersAge.append(t.t_age)
-            trainersNumber.append(t.t_phno)
-            trainersSalary.append(t.t_salary)
+            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+       
         #do_something_else()
-        df=getDataframeTrainer(trainersAge,trainersName,trainersNumber,trainersSalary)
         plotlyDict=showtableTrainer(df)
         return render(request,"deleteTrainer.html",plotlyDict)
 
@@ -171,6 +154,8 @@ def getDataframeTrainer(trainersAge,trainersName,trainersNumber,trainersSalary):
         df = df.append({'Age': a}, ignore_index=True)
         df = df.append({'Number': c}, ignore_index=True)
         df = df.append({'Salary': d}, ignore_index=True)
+    
+
     return df
 
 
@@ -186,3 +171,5 @@ def showtableTrainer(df):
     plot_div = plot(fig,output_type='div',include_plotlyjs=True)
     plotDict={'plot_div':plot_div}
     return plotDict
+
+
