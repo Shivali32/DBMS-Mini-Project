@@ -1,9 +1,19 @@
 <!DOCTYPE html>  
 <html lang="en">  
     <head>  
+        {% load static %}
+
         <meta charset="UTF-8">  
-        <title>Show Trainer</title>  
+        <title>Show Trainers</title>  
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
+
     </head>  
-    <body>
-        {{plot_div|safe}}</body>  
+    <body><br>
+        <h2>List of Trainers:</h2>
+        <br>
+        <br>
+        {{plot_div|safe}}
+        <br>
+        <br>
+        <a href="/" class="classname"style='margin-right:96px'>Home</a></body>  
 </html> 

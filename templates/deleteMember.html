@@ -1,11 +1,15 @@
 <!DOCTYPE html>  
 <html lang="en">  
-    <head>  
+    <head> 
+      {% load static %}
+ 
         <meta charset="UTF-8">  
-        <title>delete Trainer</title>  
+        <title>Delete Member</title>  
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
     </head>  
     <body>
-        Name of Member you want to delete
+       <h2> Name of Member you want to delete</h2>
+       <br>
         <form method="POST" class="post-form">  
           {% csrf_token %}  
           <label for="name">Your name: </label>
@@ -13,6 +17,10 @@
         <input id="name" type="text" name="name" value="name">
           <button type="submit" class="save btn btn-default">Submit</button>  
       </form>  
+      <h2>List Of Members</h2>
        {{plot_div|safe}}
+<br>
+<br>
+       <a href="/" class="classname"style='margin-right:96px'>Home</a>
     </body>  
 </html> 

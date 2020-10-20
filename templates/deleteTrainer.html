@@ -1,17 +1,24 @@
 <!DOCTYPE html>  
 <html lang="en">  
     <head>  
+        {% load static %}
+
         <meta charset="UTF-8">  
-        <title>delete Trainer</title>  
+        <title>Delete Trainer</title>  
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
     </head>  
     <body>
-      Name of trainer you want to delete
+     <h2> Name of trainer you want to Delete</h2>
       <form method="POST" class="post-form">  
         {% csrf_token %}  
         <label for="name">Your name: </label>
         <input id="name" type="text" name="name" value="name">
         <button type="submit" class="save btn btn-default">Submit</button>  
-    </form>  
+    </form> 
+    <br>
+    <br>
+    <h2>List of Trainers</h2> 
     {{plot_div|safe}}
+    <a href="/" class="classname"style='margin-right:96px'>Home</a>
     </body>  
 </html> 

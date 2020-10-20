@@ -1,12 +1,21 @@
 <!DOCTYPE html>  
 <html lang="en">  
-    <head>  
+    <head> 
+        {% load static %}
+ 
         <meta charset="UTF-8">  
-        <title>Show Member</title>  
+        <title>Show Members</title>
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
+  
     </head>  
-    <body>
+    <body><br>
+       <h2>List of Members:</h2>
+       <br>
        
-       Members.
+       <br>
        {{plot_div|safe}}
+       <br>
+       <br>
+       <a href="/" class="classname"style='margin-right:96px'>Home</a>
     </body>  
 </html> 

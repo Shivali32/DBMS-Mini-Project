@@ -1,14 +1,23 @@
 <!DOCTYPE html>  
 <html lang="en">  
     <head>  
+        {% load static %}
+
         <meta charset="UTF-8">  
-        <title>Trainer</title>  
+        <title>Add Trainer</title>  
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
+
     </head>  
     <body>  
+        <h2>Add a Trainer</h2>
+        <br>
     <form method="POST" class="post-form">  
             {% csrf_token %}  
             {{ form.as_p }}  
             <button type="submit" class="save btn btn-default">Submit</button>  
         </form>  
+        <br>
+        <br>
+        <a href="/" class="classname"style='margin-right:96px'>Home</a></body>  
     </body>  
 </html>  
