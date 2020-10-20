@@ -104,7 +104,7 @@ def deleteTrainer(request):
     
     if request.method == 'GET':
         for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno}, ignore_index=True)
        
             #do_something()
         plotlyDict=showtableTrainer(df)
@@ -116,7 +116,7 @@ def deleteTrainer(request):
             c.execute("DELETE FROM trainer WHERE t_name = %s " ,
         [name])
         for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno}, ignore_index=True)
        
         #do_something_else()
         plotlyDict=showtableTrainer(df)
