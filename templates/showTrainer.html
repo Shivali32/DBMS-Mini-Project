@@ -11,9 +11,29 @@
     <body><br>
         <h2>List of Trainers:</h2>
         <br>
+        <form method="POST" class="post-form">  
+            {% csrf_token %}  
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name">
+            <label for="age_g">Age Greater Than: </label>
+            <input id="age_g" type="text" name="age_g">
+            <label for="age_l">Age Lesser Than: </label>
+            <input id="age_l" type="text" name="age_l">
+            <label for="phno">Number: </label>
+            <input id="phno" type="text" name="phno">
+            <label for="hours_g">Hours Greater Than: </label>
+            <input id="hours_g" type="text" name="hours_g">
+            <label for="hours_l">Hours Lesser Than: </label>
+            <input id="hours_l" type="text" name="hours_l">
+            <label for="salary_g">Salary Greater Than: </label>
+            <input id="salary_g" type="text" name="salary_g">
+            <label for="salary_l">Salary Lesser Than: </label>
+            <input id="salary_l" type="text" name="salary_l">            
+            <button type="submit" class="save btn btn-default">Submit</button>  
+        </form>  
         <br>
         {{plot_div|safe}}
         <br>
         <br>
-        <a href="/" class="classname"style='margin-right:96px'>Home</a></body>  
+        <a href="/" class="classname"style='margin-right:96px'>Home</a></body>   
 </html> 
