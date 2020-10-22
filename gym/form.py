@@ -10,3 +10,4 @@ class trainerForm(forms.ModelForm):
     class Meta:  
         model = trainer
         fields = ("__all__")
+
