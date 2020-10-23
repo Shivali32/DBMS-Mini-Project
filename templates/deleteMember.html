@@ -14,13 +14,15 @@
           {% csrf_token %}  
           <label for="name">Your name: </label>
           
-        <input id="name" type="text" name="name" value="name">
+        <input id="name" type="text" name="name">
           <button type="submit" class="save btn btn-default">Submit</button>  
       </form>  
       <h2>List Of Members</h2>
        {{plot_div|safe}}
-<br>
-<br>
-       <a href="/" class="classname"style='margin-right:96px'>Home</a>
+      <br>
+      <br>
+      <div class="home">
+        <a href="/" class="classname"style='margin-right:96px'>Home</a>
+    </div>
     </body>  
 </html> 

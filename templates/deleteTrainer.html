@@ -12,13 +12,18 @@
       <form method="POST" class="post-form">  
         {% csrf_token %}  
         <label for="name">Your name: </label>
-        <input id="name" type="text" name="name" value="name">
+        <input id="name" type="text" name="name">
         <button type="submit" class="save btn btn-default">Submit</button>  
     </form> 
     <br>
     <br>
     <h2>List of Trainers</h2> 
     {{plot_div|safe}}
-    <a href="/" class="classname"style='margin-right:96px'>Home</a>
+    <br>
+    <br>
+    <div class="home">
+        <a href="/" class="classname"style='margin-right:96px'>Home</a>
+    </div>
+
     </body>  
 </html> 

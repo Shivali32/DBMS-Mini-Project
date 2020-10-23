@@ -224,12 +224,12 @@ def showMember(request):
 
 def deleteMember(request):
 
-    df = pd.DataFrame(columns = ['Name', 'Age','Number']) 
+    df = pd.DataFrame(columns = ['Name', 'Age','Number','Time','Years']) 
    
     if request.method == 'GET':
         #do_something()
         for m in member.objects.raw('SELECT * FROM member'):
-              df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+              df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
        
         #df=getDataframeMember(membersAge,membersName,membersNumber)
         plotlyDict=showtableMember(df)
@@ -241,7 +241,7 @@ def deleteMember(request):
             c.execute("DELETE FROM member WHERE m_name = %s; " ,
         [name])
         for m in member.objects.raw('SELECT * FROM member;'):
-            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno}, ignore_index=True)
+            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
        
         #do_something_else()
         
@@ -252,11 +252,11 @@ def deleteMember(request):
 
 def deleteTrainer(request):
     
-    df = pd.DataFrame(columns = ['Name', 'Age','Number','Salary']) 
+    df = pd.DataFrame(columns = ['Name', 'Age','Number','Hours','Salary']) 
     
     if request.method == 'GET':
         for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno}, ignore_index=True)
+            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Hours':t.t_hours,'Salary': t.t_salary}, ignore_index=True)            
        
             #do_something()
         plotlyDict=showtableTrainer(df)
@@ -268,7 +268,7 @@ def deleteTrainer(request):
             c.execute("DELETE FROM trainer WHERE t_name = %s " ,
         [name])
         for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno}, ignore_index=True)
+            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Hours':t.t_hours,'Salary': t.t_salary}, ignore_index=True)            
        
         #do_something_else()
         plotlyDict=showtableTrainer(df)
