@@ -116,12 +116,12 @@ label {
     width: 100%;
     margin-right: 10%;
 }
-input, select, textarea {
+input, select, textarea, ul {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
-input {
+input, ul {
     width: 80%;
     padding: 5px;
 }
@@ -173,8 +173,23 @@ input[type="date"]::-webkit-inner-spin-button {
     top: 30px;
     z-index: 1;
 }
-input[type=radio], input[type=checkbox]  {
-    display: none;
+form ul li::marker{
+    color:#fff;
+}
+form ul{
+    padding: 5px;
+    margin-left: 10%;
+    margin-top: 0;
+}
+form ul li {
+    display: inline;
+}
+form  ul label{
+    margin-right: 30px;
+}
+input[type=radio], input[type=checkbox] {
+   /* display: none;*/
+   width: 5%;
 }
 label.radio {
     position: relative;
