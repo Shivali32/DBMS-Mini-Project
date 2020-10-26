@@ -1,0 +1,43 @@
+<!DOCTYPE html>  
+<html lang="en">  
+    <head>  
+        {% load static %}
+
+        <meta charset="UTF-8">  
+        <title>Update Trainer</title>  
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
+
+    </head>  
+    <body>  
+        <h2>Update a Trainer</h2>
+        <br>
+        <form method="POST" class="post-form">  
+            {% csrf_token %}              
+            <label for="name">Name of Trainer to update: </label>
+            <input id="name" type="text" name="name">
+            <button type="submit" class="save btn btn-default" name="search">Submit</button>  
+        </form>  
+        <br>
+        <br>
+        <form method="POST" class="post-form"> 
+
+            {% csrf_token %}   
+            <label for="name">Trainer Name: </label>
+            <input id="name" style="background-color: #a3c2c2b9;" type="text" name="name" value="{{ t_name }}"> 
+            <label for="age">Trainer Age: </label>
+            <input id="age" type="text" name="age" value="{{ t_age }}">          
+            <label for="phno">Phone Number: </label>
+            <input id="tphno" type="text" name="phno" value="{{ t_phno }}">
+            <label for="hours">Working Hours: </label>
+            <input id="hours" type="text" name="hours" value="{{ t_hours }}">
+            <label for="salary">Expected Salary: </label>
+            <input id="salary" type="text" name="salary" value="{{ t_salary }}"> 
+            <button type="submit" class="save btn btn-default" name="update">Submit</button>    
+        </form>
+        <br>
+        <br>
+        <div class="home">
+            <a href="/" class="classname"style='margin-right:96px'>Home</a>
+        </div> 
+    </body>  
+</html>  

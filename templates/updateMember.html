@@ -1,0 +1,43 @@
+<!DOCTYPE html>  
+<html lang="en">  
+    <head>  
+        {% load static %}
+
+        <meta charset="UTF-8">  
+        <title>Update Member</title>  
+        <link rel="stylesheet" href="{%static 'css/styles.css' %}" type="text/css">
+
+    </head>  
+    <body>  
+        <h2>Update a Member</h2>
+        <br>
+        <form method="POST" class="post-form">  
+            {% csrf_token %}              
+            <label for="name">Name of Member to update: </label>
+            <input id="name" type="text" name="name">
+            <button type="submit" class="save btn btn-default" name="search">Search</button>  
+        </form>  
+        <br>
+        <br>
+        <form method="POST" class="post-form">  
+
+            {% csrf_token %}   
+            <label for="name">Member Name: </label>
+            <input id="name" style="background-color: #a3c2c2b9;" type="text" name="name" value="{{ m_name }}">  
+            <label for="age">Member Age: </label>
+            <input id="age" type="text" name="age" value="{{ m_age }}">          
+            <label for="phno">Phone Number: </label>
+            <input id="tphno" type="text" name="phno" value="{{ m_phno }}">
+            <label for="time">Gym Timing: </label>
+            <input id="tphno" type="text" name="time" value="{{ m_time }}">
+            <label for="years">Years Training: </label>
+            <input id="years" type="text" name="years" value="{{ m_years }}"> 
+            <button type="submit" class="save btn btn-default" name="update">Submit</button>    
+        </form>
+        <br>
+        <br>
+        <div class="home">
+            <a href="/" class="classname"style='margin-right:96px'>Home</a>
+        </div> 
+    </body>  
+</html>  

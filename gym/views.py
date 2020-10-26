@@ -327,3 +327,74 @@ def showtableTrainer(df):
     return plotDict
 
 
+def updateTrainer(request):
+
+    if request.method == 'GET':
+
+        return render(request, "updateTrainer.html")
+    elif request.method == 'POST':
+        print('1-----------------------------------------------------------------------------------------------------')
+        #if 'search' in request.POST:
+        name = request.POST['name']
+        print(name)
+        for t in trainer.objects.raw('SELECT * FROM trainer WHERE t_name == %s ;', [name]):
+            t = {   't_name' : t.t_name, 
+                    't_age' : t.t_age,
+                    't_phno' : t.t_phno,
+                    't_hours' : t.t_hours,
+                    't_salary' : t.t_salary,
+                    't_fid' : t.t_fid
+                }      
+        print(t)
+
+        if 'update' in request.POST:
+            print('2-----------------------------------------------------------------------------------------------------')
+            #name = request.POST['name']
+            age = request.POST['age']
+            print(age)
+            phno = request.POST['phno']
+            print(phno)
+            hours = request.POST['hours']
+            salary = request.POST['salary']  
+            trainers = [name,age,phno,hours,salary]
+            print(trainers)
+            cursor = connection.cursor()
+            #cursor.execute("UPDATE trainer SET t_name = %s, t_age = %s, t_phno = %s, t_hours = %s, t_salary = %s WHERE t_name == %s ;", [namei, age, phno, hours, salary, name])
+            cursor.execute("UPDATE trainer SET t_age = %s, t_phno = %s, t_hours = %s, t_salary = %s WHERE t_name == %s ;", [age, phno, hours, salary, name])
+
+        return render(request, "updateTrainer.html", t)
+
+def updateMember(request):
+
+    if request.method == 'GET':
+
+        return render(request, "updateMember.html")
+    elif request.method == 'POST':
+        print('1-----------------------------------------------------------------------------------------------------')
+        #if 'search' in request.POST:
+        name = request.POST['name']
+        print(name)
+        for m in member.objects.raw('SELECT * FROM member WHERE m_name == %s ;', [name]):
+            m = {   'm_name' : m.m_name, 
+                    'm_age' :  m.m_age,
+                    'm_phno' : m.m_phno,
+                    'm_time' : m.m_time,
+                    'm_years' : m.m_years,
+                    'm_fid' : m.m_fid
+                }      
+        print(m)
+
+        if 'update' in request.POST:
+            print('2-----------------------------------------------------------------------------------------------------')
+            #name = request.POST['name']
+            age = request.POST['age']
+            phno = request.POST['phno']
+            time = request.POST['time']
+            years = request.POST['years']  
+            members = [name,age,phno,time,years]
+            print(members)
+            cursor = connection.cursor()
+            #cursor.execute("UPDATE member SET m_name = %s, m_age = %s, m_phno = %s, m_hours = %s, m_salary = %s WHERE m_name == %s ;", [namei, age, phno, time, years, name])
+            cursor.execute("UPDATE member SET m_age = %s, m_phno = %s, m_time = %s, m_years = %s WHERE m_name == %s ;", [age, phno, time, years, name])
+
+        return render(request, "updateMember.html", m)
