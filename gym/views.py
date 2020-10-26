@@ -139,13 +139,16 @@ def showTrainer(request):
 
 
 def showMember(request):
-    df = dfn = dfa_g = dfa_l = dfp = dft = dfy_g = dfy_l = pd.DataFrame(columns = ['Name', 'Age','Number','Time','Years']) 
+    df = dfn = dfa_g = dfa_l = dfp = dft = dfy_g = dfy_l = pd.DataFrame(columns = ['Name', 'Age','Number','Time','Years','Trainer','Facility']) 
     
     if request.method == 'GET':
         for m in member.objects.raw('SELECT * FROM member;'):
-            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
+            trainerName=str(m.m_tid)
+            facilityName=str(m.m_fid)
+            
+            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years,'Trainer':trainerName,'Facility':facilityName}, ignore_index=True)        
         #df=getDataframeMember(membersAge,membersName,membersNumber)
-        print (df)
+        #print (df)
         plotlyDict=showtableMember(df)
         return render(request,"showMember.html",plotlyDict)
     elif request.method == 'POST':
@@ -157,19 +160,20 @@ def showMember(request):
         years_g  = request.POST['years_g']
         years_l  = request.POST['years_l']        
         members = [name,age_g,age_l,phno,time,years_g,years_l]
-        print(members)
+        #print(members)
         
         if name:
             for m in member.objects.raw('SELECT * FROM member WHERE m_name == %s ;', [name]):
+                
                 dfn = dfn.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dfn)
+            #print(dfn)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dfn = dfn.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
         if age_g:
             for m in member.objects.raw('SELECT * FROM member WHERE m_age >= %s ;', [age_g]):
                 dfa_g = dfa_g.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dfa_g)
+            #print(dfa_g)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dfa_g = dfa_g.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
@@ -177,7 +181,7 @@ def showMember(request):
         if age_l:
             for m in member.objects.raw('SELECT * FROM member WHERE m_age <= %s ;', [age_l]):
                 dfa_l = dfa_l.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dfa_l)
+            #print(dfa_l)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dfa_l = dfa_l.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
@@ -185,7 +189,7 @@ def showMember(request):
         if phno:
             for m in member.objects.raw('SELECT * FROM member WHERE m_phno == %s ;', [phno]):
                 dfp = dfp.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dfp)
+            #print(dfp)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dfp = dfp.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
@@ -193,7 +197,7 @@ def showMember(request):
         if time:
             for m in member.objects.raw('SELECT * FROM member WHERE m_time >= %s ;', [time]):
                 dft = dft.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dft)
+            #print(dft)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dft = dft.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
@@ -201,7 +205,7 @@ def showMember(request):
         if years_g:
             for m in member.objects.raw('SELECT * FROM member WHERE m_years >= %s ;', [years_g]):
                 dfy_g = dfy_g.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dfy_g)
+            #print(dfy_g)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dfy_g = dfy_g.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
@@ -209,14 +213,14 @@ def showMember(request):
         if years_l:
             for m in member.objects.raw('SELECT * FROM member WHERE m_years <= %s ;', [years_l]):
                 dfy_l = dfy_l.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
-            print(dfy_l)
+            #print(dfy_l)
         else:
             for m in member.objects.raw('SELECT * FROM member;'):
                 dfy_l = dfy_l.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years}, ignore_index=True)        
         dfm = pd.merge(dfm, dfy_l, how ='inner')
                 
         
-        print('dfm' + dfm) 
+        #print('dfm' + dfm) 
         plotlyDict=showtableMember(dfm)
         return render(request,"showMember.html",plotlyDict)
 
@@ -277,10 +281,10 @@ def deleteTrainer(request):
 
 def showtableMember(df):
     fig = go.Figure(data=[go.Table(
-    header=dict(values=list(["Name", "Age","Number","Time","Years"]),
+    header=dict(values=list(["Name", "Age","Number","Time","Years","Trainer","Facility"]),
                 fill_color='paleturquoise',
                 align='left'),
-    cells=dict(values=[df['Name'], df['Age'], df['Number'],df['Time'],df['Years']],
+    cells=dict(values=[df['Name'], df['Age'], df['Number'],df['Time'],df['Years'],df['Trainer'],df['Facility']],
                fill_color='lavender',
                align='left'))
     ])
