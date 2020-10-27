@@ -189,7 +189,7 @@ form ul li {
 form  ul label{
    /* margin-right: 30px;*/
 }
-input[type=radio], input[type=checkbox] {
+.post-form input[type=radio], input[type=checkbox] {
    /* display: none;*/
    width: 5%;
 }
