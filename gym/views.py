@@ -285,14 +285,25 @@ def deleteMember(request):
         plotlyDict=showtableMember(df)
         return render(request,"deleteMember.html",plotlyDict)
     elif request.method == 'POST':
+        if 'desc' in request.POST:
+            for m in member.objects.raw('SELECT * FROM member ORDER BY m_name DESC;'):
+                trainerName=str(m.m_tid)
+                facilityName=str(m.m_fid)          
+                df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years,'Trainer':trainerName,'Facility':facilityName}, ignore_index=True)                  
+        else:
+            for m in member.objects.raw('SELECT * FROM member ORDER BY m_name ASC;'):
+                trainerName=str(m.m_tid)
+                facilityName=str(m.m_fid) 
+                df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years,'Trainer':trainerName,'Facility':facilityName}, ignore_index=True)                  
+        
         name=request.POST['name']
         print(name)
         with connection.cursor() as c:
             c.execute("DELETE FROM member WHERE m_name = %s; " ,[name])
-        for m in member.objects.raw('SELECT * FROM member;'):
-            trainerName=str(m.m_tid)
-            facilityName=str(m.m_fid)
-            df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years,'Trainer':trainerName,'Facility':facilityName}, ignore_index=True)        
+        # for m in member.objects.raw('SELECT * FROM member;'):
+        #     trainerName=str(m.m_tid)
+        #     facilityName=str(m.m_fid)
+        #     df = df.append({'Name':m.m_name ,'Age': m.m_age,'Number':m.m_phno,'Time': m.m_time,'Years':m.m_years,'Trainer':trainerName,'Facility':facilityName}, ignore_index=True)        
        
         #do_something_else()
         
@@ -314,13 +325,22 @@ def deleteTrainer(request):
         plotlyDict=showtableTrainer(df)
         return render(request,"deleteTrainer.html",plotlyDict)
     elif request.method == 'POST':
+        if 'desc' in request.POST:
+            for t in trainer.objects.raw('SELECT * FROM trainer ORDER BY t_name DESC;'):
+                facilityName=str(t.t_fid)            
+                df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Hours':t.t_hours,'Salary': t.t_salary,'Facility':facilityName}, ignore_index=True)            
+        else:
+            for t in trainer.objects.raw('SELECT * FROM trainer ORDER BY t_name ASC;'):
+                facilityName=str(t.t_fid)            
+                df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Hours':t.t_hours,'Salary': t.t_salary,'Facility':facilityName}, ignore_index=True)            
+        
         name=request.POST['name']
         print(name)
         with connection.cursor() as c:
             c.execute("DELETE FROM trainer WHERE t_name = %s " ,[name])
-        for t in trainer.objects.raw('SELECT * FROM trainer;'):
-            facilityName=str(t.t_fid)            
-            df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Hours':t.t_hours,'Salary': t.t_salary,'Facility':facilityName}, ignore_index=True)            
+        # for t in trainer.objects.raw('SELECT * FROM trainer;'):
+        #     facilityName=str(t.t_fid)            
+        #     df = df.append({'Name':t.t_name ,'Age': t.t_age,'Number':t.t_phno,'Hours':t.t_hours,'Salary': t.t_salary,'Facility':facilityName}, ignore_index=True)            
        
         #do_something_else()
         plotlyDict=showtableTrainer(df)
